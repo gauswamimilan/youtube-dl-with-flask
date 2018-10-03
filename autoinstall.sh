@@ -1,4 +1,3 @@
-sudo su
 apt-get update
 apt-get upgrade -y
 echo "-apt-get install python3 -y > /dev/null"
