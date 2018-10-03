@@ -199,9 +199,8 @@
               url: '/download_file',
               data: { file_name : json_obj.files[no].name },
               type: 'POST',
-              success: function(response, textStatus, jqXHR) {
-                   console.log("download file?");
-                   update();
+              success: function(response, data) {
+                   console.info(data);
               },
               error: function(error) {
                    console.log(error);
