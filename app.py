@@ -92,6 +92,7 @@ def start_download():
     global no_of_files
     global file_list
     f= open("download/text/"+str(no_of_files)+".txt","w+")
+    f.write("Your download is Starting..")
     f.close()
     file_list.append(no_of_files)
     output = subprocess.call('youtube-dl -o "download/%(title)s" ' + link_address + ' > download/text/'+str(no_of_files)+'.txt &', shell=True)

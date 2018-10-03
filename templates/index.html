@@ -126,7 +126,7 @@
         update();
         setInterval(function(){
             update();
-        },600);
+        },900);
     });
     function update(){
       if(navigator.onLine){
@@ -136,6 +136,7 @@
           type: 'POST',
           success: function(response) {
               json_obj = $.parseJSON(response);
+              modal.style.display = "none";
               $('#last_line').html("");
               $('#last_line').append('total disk:-<kbd>'+json_obj.total_space+'</kbd> & available disk:-<kbd>'+json_obj.available_space+'</kbd>');
               if(json_obj.no_of_files == 0)
@@ -183,8 +184,9 @@
            url: '/start_download',
            data: { download_link : link },
            type: 'POST',
-           success: function(response, textStatus, jqXHR) {
+           success: function(response) {
                 console.log("Is Started download ? ");
+                update();
            },
            error: function(error) {
                 console.log(error);
@@ -199,6 +201,7 @@
               type: 'POST',
               success: function(response, textStatus, jqXHR) {
                    console.log("download file?");
+                   update();
               },
               error: function(error) {
                    console.log(error);
@@ -211,8 +214,9 @@
               url: '/remove_text_file',
               data: { is_delete : no },
               type: 'POST',
-              success: function(response, textStatus, jqXHR) {
+              success: function(response) {
                    console.log("Is file deleted?");
+                   update();
               },
               error: function(error) {
                    console.log(error);
@@ -228,6 +232,7 @@
              type: 'POST',
              success: function(response) {
                   console.log(response);
+                  update();
              },
              error: function(error) {
                   console.log(error);
