@@ -1,0 +1,246 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="author" content="colorlib.com">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" />
+    <link href="../static/css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <style>
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 10px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        </style>
+        <link type="text/css" rel="stylesheet" href="../static/css/404style.css" />
+  </head>
+  <body>
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div id="notfound">
+        <div class="notfound">
+          <div class="notfound-404">
+            <h1>503</h1>
+            <h2>Disconnected</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+    <div class="s007">
+      <form id="myForm">
+        <div class="inner-form">
+          <div class="basic-search">
+            <div class="input-field">
+              <div class="icon-wrap">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+                  <path d="M18.869 19.162l-5.943-6.484c1.339-1.401 2.075-3.233 2.075-5.178 0-2.003-0.78-3.887-2.197-5.303s-3.3-2.197-5.303-2.197-3.887 0.78-5.303 2.197-2.197 3.3-2.197 5.303 0.78 3.887 2.197 5.303 3.3 2.197 5.303 2.197c1.726 0 3.362-0.579 4.688-1.645l5.943 6.483c0.099 0.108 0.233 0.162 0.369 0.162 0.121 0 0.242-0.043 0.338-0.131 0.204-0.187 0.217-0.503 0.031-0.706zM1 7.5c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5-2.916 6.5-6.5 6.5-6.5-2.916-6.5-6.5z"></path>
+                </svg>
+              </div>
+              <input id="search" type="text" placeholder="Download..." />
+              <div class="result-count">
+                <div class="input-field">
+                <button id="upload" type="button" class="btn-search">Download</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <blockquote class="blockquote-reverse">
+            <footer id="last_line"></footer>
+          </blockquote>
+          <div id="display_here">
+            <!-- <div class="advance-search">
+              <span>Advanced Search </span>
+              <span class="desc"><pre>size:-   Percentage:- </pre></span>
+              <div class="row third">
+                <div class="input-field">
+                  <button type="button" class="btn-search" id="download" >Download</button>
+                  <button type="button" class="btn-delete" id="delete" >Delete</button>
+                </div>
+              </div>
+            </div>-->
+          </div>
+        </div>
+      </form>
+    </div>
+  </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+<script>
+    var modal = document.getElementById('myModal');
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    var no_of_files = 0;
+    var json_obj;
+    var json_old = 0;
+    $( window ).ready(function() {
+        update();
+        setInterval(function(){
+            update();
+        },600);
+    });
+    function update(){
+      if(navigator.onLine){
+       $.ajax({
+          url: '/getfile',
+          data: { is_delete : "hello" },
+          type: 'POST',
+          success: function(response) {
+              json_obj = $.parseJSON(response);
+              $('#last_line').html("");
+              $('#last_line').append('total disk:-<kbd>'+json_obj.total_space+'</kbd> & available disk:-<kbd>'+json_obj.available_space+'</kbd>');
+              if(json_obj.no_of_files == 0)
+              {
+                  $('#display_here').html("");
+              }
+              if(json_obj.no_of_files > 0) {
+                  no_of_files = json_obj.no_of_files;
+                  $('#display_here').html("");
+                  for (var i in json_obj.files)
+                   {
+                        var size = json_obj.files[i].size;
+                        if(json_obj.files[i].id == 0)
+                        {
+                           $('#display_here').append('<div class="advance-search"><span>'+json_obj.files[i].name+'</span><button type="button" class="btn-danger" id="'+json_obj.files[i].percentage+'" >Delete</button></div>');
+                           continue;
+                        }
+                        if(size<1024)
+                        {
+                           size = size + ' KB';
+                        }
+                        else if(size<1000000)
+                        {
+                           size = size/1000 + ' MB';
+                        }
+                        else
+                        {
+                            size = size/1000000 + ' GB';
+                        }
+                        $('#display_here').append('<br><div class="advance-search"><span>'+json_obj.files[i].name+'</span><span class="desc"><pre>size:-'+size+'   Percentage:-'+json_obj.files[i].percentage+'% </pre></span><div class="row third"><div class="input-field"><button type="button" class="btn-search" id="'+json_obj.files[i].id+'" >Download</button><button type="button" class="btn-delete" id="'+json_obj.files[i].id+'" >Delete</button></div></div></div>');
+                   }
+                   // console.log(response);
+              }
+          },
+          error: function(error) {
+              modal.style.display = "block";
+          }
+       });
+     }
+    }
+    $('#upload').click(function(){
+      console.log($('#search').val());
+      var link = $('#search').val();
+      $.ajax({
+           url: '/start_download',
+           data: { download_link : link },
+           type: 'POST',
+           success: function(response, textStatus, jqXHR) {
+                console.log("Is Started download ? ");
+           },
+           error: function(error) {
+                console.log(error);
+           }
+      });
+    });
+    $('#display_here').on("click", "button.btn-search", function(){
+        var no = $(this).attr('id')-1;
+         $.ajax({
+              url: '/download_file',
+              data: { file_name : json_obj.files[no].name },
+              type: 'POST',
+              success: function(response, textStatus, jqXHR) {
+                   console.log("download file?");
+              },
+              error: function(error) {
+                   console.log(error);
+              }
+         });
+    });
+    $('#display_here').on("click", "button.btn-danger", function(){
+        var no = $(this).attr('id');
+         $.ajax({
+              url: '/remove_text_file',
+              data: { is_delete : no },
+              type: 'POST',
+              success: function(response, textStatus, jqXHR) {
+                   console.log("Is file deleted?");
+              },
+              error: function(error) {
+                   console.log(error);
+              }
+         });
+    });
+    $('#display_here').on("click", "button.btn-delete", function(){
+        var no = $(this).attr('id')-1;
+        console.log("delete start"+no);
+        $.ajax({
+            url: '/remove_file',
+             data: { is_delete : json_obj.files[no].name },
+             type: 'POST',
+             success: function(response) {
+                  console.log(response);
+             },
+             error: function(error) {
+                  console.log(error);
+             }
+        });
+        update();
+    });
+    document.getElementById("myForm").onkeypress = function(e) {
+      var key = e.charCode || e.keyCode || 0;
+      if (key == 13) {
+        console.log($('#search').val());
+        e.preventDefault();
+      }
+    }
+</script>
+</html>
