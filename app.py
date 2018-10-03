@@ -74,15 +74,19 @@ def remove_text_file():
     return json.dumps({'status': 'deleted', 'file name': file_name})
 
 
-@app.route('/download_file', methods=['POST'])
-def download_file():
-    file_name = request.form
-    display_name = file_name["file_name"]
-    file_path = "./download/"+display_name
-    try:
-        return send_file(file_path, attachment_filename=display_name, as_attachment=True)
-    except Exception as e:
-        return str(e)
+@app.route('/download_file/<file_id>')
+def download_file(file_id):
+    display_name = ''
+    file_id = int(file_id)
+    with open('files.json', 'r') as json_file:
+        json_file = json.load(json_file)
+        for i in json_file["files"]:
+            if i["id"] == file_id:
+                display_name = i["name"]
+                break
+    file_path = "download/"+display_name
+    print(file_path)
+    return send_file(file_path, attachment_filename=display_name, as_attachment=True)
 
 
 @app.route('/start_download',methods=['POST'])

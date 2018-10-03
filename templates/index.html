@@ -166,7 +166,7 @@
                         {
                             size = size/1000000 + ' GB';
                         }
-                        $('#display_here').append('<br><div class="advance-search"><span>'+json_obj.files[i].name+'</span><span class="desc"><pre>size:-'+size+'   Percentage:-'+json_obj.files[i].percentage+'% </pre></span><div class="row third"><div class="input-field"><button type="button" class="btn-search" id="'+json_obj.files[i].id+'" >Download</button><button type="button" class="btn-delete" id="'+json_obj.files[i].id+'" >Delete</button></div></div></div>');
+                        $('#display_here').append('<br><div class="advance-search"><span>'+json_obj.files[i].name+'</span><span class="desc"><pre>size:-'+size+'   Percentage:-'+json_obj.files[i].percentage+'% </pre></span><div class="row third"><div class="input-field"><a href="/download_file/'+json_obj.files[i].id+'" target="blank"><button type="button" class="btn btn-success" >Download</button></a><button type="button" class="btn-delete" id="'+json_obj.files[i].id+'" >Delete</button></div></div></div>');
                    }
                    // console.log(response);
               }
@@ -192,20 +192,6 @@
                 console.log(error);
            }
       });
-    });
-    $('#display_here').on("click", "button.btn-search", function(){
-        var no = $(this).attr('id')-1;
-         $.ajax({
-              url: '/download_file',
-              data: { file_name : json_obj.files[no].name },
-              type: 'POST',
-              success: function(response, data) {
-                   console.info(data);
-              },
-              error: function(error) {
-                   console.log(error);
-              }
-         });
     });
     $('#display_here').on("click", "button.btn-danger", function(){
         var no = $(this).attr('id');
