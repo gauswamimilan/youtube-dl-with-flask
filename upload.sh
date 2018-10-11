@@ -1,3 +1,4 @@
+#!/bin/bash
 git add .
 echo "enter commit name"
 read name
