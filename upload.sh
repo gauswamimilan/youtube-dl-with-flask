@@ -2,6 +2,5 @@
 git add .
 echo "enter commit name"
 read name
-git commit -m "$name"
-gir remote add origin https://github.com/gauswamimilan/youtube-dl-with-flask
+git commit -a -m "$name"
 git push -u origin master
