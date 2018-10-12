@@ -88,17 +88,19 @@
           <blockquote class="blockquote-reverse">
             <footer id="last_line"></footer>
           </blockquote>
-          <div id="display_here">
-            <!-- <div class="advance-search">
-              <span>Advanced Search </span>
-              <span class="desc"><pre>size:-   Percentage:- </pre></span>
-              <div class="row third">
-                <div class="input-field">
-                  <button type="button" class="btn-search" id="download" >Download</button>
-                  <button type="button" class="btn-delete" id="delete" >Delete</button>
+          <div class="advance-search">
+            <div id="display_here">
+              <!-- <div class="advance-search">
+                <span>Advanced Search </span>
+                <span class="desc"><pre>size:-   Percentage:- </pre></span>
+                <div class="row third">
+                  <div class="input-field">
+                    <button type="button" class="btn-search" id="download" >Download</button>
+                    <button type="button" class="btn-delete" id="delete" >Delete</button>
+                  </div>
                 </div>
-              </div>
-            </div>-->
+              </div>-->
+            </div>
           </div>
         </div>
       </form>
@@ -126,7 +128,7 @@
         update();
         setInterval(function(){
             update();
-        },900);
+        },1200);
     });
     function update(){
       if(navigator.onLine){
@@ -146,12 +148,13 @@
               if(json_obj.no_of_files > 0) {
                   no_of_files = json_obj.no_of_files;
                   $('#display_here').html("");
+                  $('#display_here').append('<ul class="list-unstyled">');
                   for (var i in json_obj.files)
                    {
                         var size = json_obj.files[i].size;
                         if(json_obj.files[i].id == 0)
                         {
-                           $('#display_here').append('<div class="advance-search"><span>'+json_obj.files[i].name+'</span><button type="button" class="btn-danger" id="'+json_obj.files[i].percentage+'" >Delete</button></div>');
+                           $('#display_here').append('<span>'+json_obj.files[i].name+'</span><button type="button" class="btn-danger" id="'+json_obj.files[i].percentage+'" >Delete</button></div><div class="advance-search">');
                            continue;
                         }
                         if(size<1024)
@@ -166,8 +169,9 @@
                         {
                             size = size/1000000 + ' GB';
                         }
-                        $('#display_here').append('<br><div class="advance-search"><span>'+json_obj.files[i].name+'</span><span class="desc"><pre>size:-'+size+'   Percentage:-'+json_obj.files[i].percentage+'% </pre></span><div class="row third"><div class="input-field"><a href="/download_file/'+json_obj.files[i].id+'" target="blank"><button type="button" class="btn btn-success" >Download</button></a><button type="button" class="btn-delete" id="'+json_obj.files[i].id+'" >Delete</button></div></div></div>');
+                        $('#display_here').append('<li><a href="/download_file/'+json_obj.files[i].id+'" target="blank">'+json_obj.files[i].name+'</a><button type="button" class="btn-delete" id="'+json_obj.files[i].id+'" ><span class="glyphicon glyphicon-minus-sign"></span></button><ul><li>size:-'+size+'</li></ul></li>');
                    }
+                   $('#display_here').append('</ul>');
                    // console.log(response);
               }
           },
