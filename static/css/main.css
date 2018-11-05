@@ -818,7 +818,7 @@ legend {
       justify-content: center;
   -ms-flex-align: center;
       align-items: center;
-  background: #00b5e9;
+  background: #000;
   padding: 15px;
   font-family: 'Roboto', sans-serif;
 }
@@ -840,7 +840,7 @@ legend {
 .s007 form .inner-form .input-field input {
   height: 100%;
   border: 0;
-  background: #fff;
+  background: #333; // changed form #fff to #333
   display: block;
   width: 100%;
   padding: 10px 32px 10px 70px;
@@ -875,7 +875,7 @@ legend {
   min-width: 100px;
   height: 40px;
   padding: 0 15px;
-  background: #57b846;
+  background: #800000;
   white-space: nowrap;
   border-radius: 3px;
   font-size: 14px;
@@ -965,7 +965,7 @@ legend {
 }
 
 .s007 form .inner-form .advance-search {
-  background: #fff;
+  background: #999;
   padding: 40px;
   border-radius: 3px;
   box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
@@ -1115,6 +1115,21 @@ legend {
 
 .s007 form .inner-form .advance-search .choices[data-type*="select-one"].is-open:after {
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg fill='%23999' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3e%3cpath d='M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z'/%3e%3c/svg%3e");
+}
+
+.btn-delete{
+  min-width: 5px;
+  height: 20px;
+  background: #444;
+  margin-left: 8px;
+  white-space: nowrap;
+  border-radius: 3px;
+  font-size: 14px;
+  color: #fff;
+  transition: all .2s ease-out, color .2s ease-out;
+  border: 0;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 767px) {
