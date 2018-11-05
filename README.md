@@ -6,12 +6,12 @@ Youtube-dl-with-flask is personal cloud hosted youtube video downloader created 
 To install requirements write the following commands
 ```sh
 wget https://raw.githubusercontent.com/gauswamimilan/youtube-dl-with-flask/master/autoinstall.sh
-soure autoinstall.sh
+source autoinstall.sh
 ```
 Next two lines will run app
 ```sh
 cd youtube-dl-with-flask
-gunicorn --bind=0.0.0.0:80 app:app
+gunicorn --bind=0.0.0.0:80 app:app --daemon
 ```
 **Well you are done.**
 close terminal and type ip address of server in browser and enjoy ( to test in your local machine you can type 'localhost' in browser )
