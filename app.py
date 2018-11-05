@@ -85,7 +85,6 @@ def download_file(file_id):
                 display_name = i["name"]
                 break
     file_path = "download/"+display_name
-    print(file_path)
     return send_file(file_path, attachment_filename=display_name, as_attachment=True)
 
 
@@ -99,7 +98,7 @@ def start_download():
     f.write("Your download is Starting..")
     f.close()
     file_list.append(no_of_files)
-    output = subprocess.call('youtube-dl -o "download/%(title)s" ' + link_address + ' > download/text/'+str(no_of_files)+'.txt &', shell=True)
+    output = subprocess.call('youtube-dl -o "download/%(title)s.%(ext)s" ' + link_address + ' > download/text/'+str(no_of_files)+'.txt &', shell=True)
     no_of_files = no_of_files + 1
     return "started downloading"
 

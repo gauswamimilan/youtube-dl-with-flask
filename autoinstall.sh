@@ -14,7 +14,7 @@ apt-get install python -y > /dev/null
 echo "-apt-get install nginx -y > /dev/null"
 apt-get install nginx -y > /dev/null
 
-echo "--start nginx"
+echo "->start nginx"
 /etc/init.d/nginx start > /dev/null
 
 echo "---changing nginx setting"
@@ -26,11 +26,24 @@ cat youtube-dl-with-flask/installation/server_setting.txt >> /etc/nginx/sites-en
 echo "--restart nginx"
 /etc/init.d/nginx restart > /dev/null
 
+echo "->installing youtube-dl"
 echo "-sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl"
 sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
 
 echo "-sudo chmod a+rx /usr/local/bin/youtube-dl"
 sudo chmod a+rx /usr/local/bin/youtube-dl
+
+echo "-sudo apt-get install build-essential chrpath libssl-dev libxft-dev libfreetype6-dev libfreetype6 libfontconfig1-dev libfontconfig1 -y > /dev/null"
+sudo apt-get install build-essential chrpath libssl-dev libxft-dev libfreetype6-dev libfreetype6 libfontconfig1-dev libfontconfig1 -y > /dev/null
+
+echo "->downloading phantomjs"
+sudo wget -q https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
+echo "extracting phantomjs"
+sudo tar xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2 -C /usr/local/share/
+sudo ln -s /usr/local/share/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/
+
+echo "->testing phantomjs"
+phantomjs --version
 
 echo "-pip3 install virtualenv > /dev/null"
 pip3 install virtualenv > /dev/null
