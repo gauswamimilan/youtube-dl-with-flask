@@ -8,6 +8,7 @@ To install requirements write the following commands
 wget https://raw.githubusercontent.com/gauswamimilan/youtube-dl-with-flask/master/autoinstall.sh
 source autoinstall.sh
 ```
+**Note:-**Installation may take a while so keep patience
 Now goto app folder and run app using following command
 ```sh
 cd youtube-dl-with-flask
