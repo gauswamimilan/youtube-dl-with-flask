@@ -8,11 +8,11 @@ To install requirements write the following commands
 wget https://raw.githubusercontent.com/gauswamimilan/youtube-dl-with-flask/master/autoinstall.sh
 source autoinstall.sh
 ```
-Next two lines will run app
+Now goto app folder and run app using following command
 ```sh
 cd youtube-dl-with-flask
-gunicorn --bind=0.0.0.0:80 app:app --daemon
+gunicorn app:app --daemon
 ```
 **Well you are done.**
-close terminal and type ip address of server in browser and enjoy ( to test in your local machine you can type 'localhost' in browser )
-in the above steps **gunicorn --bind=0.0.0.0:80 app:app** will deploy app in localhost of server
+close terminal and type ip address or domain name of server in browser and enjoy ( to test in your local machine you can type 'localhost' in browser )
+in the above steps **gunicorn app:app --daemon** will deploy app in localhost of server and nginx will serve as revese proxy and allow user to acess website
