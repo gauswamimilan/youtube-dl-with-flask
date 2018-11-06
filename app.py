@@ -1,4 +1,4 @@
-from flask import Flask, render_template, json, request, send_file
+from flask import Flask, render_template, json, request, send_file, make_response
 import os
 import json
 import subprocess
@@ -84,8 +84,18 @@ def download_file(file_id):
             if i["id"] == file_id:
                 display_name = i["name"]
                 break
-    file_path = "download/"+display_name
-    return send_file(file_path, attachment_filename=display_name, as_attachment=True)
+    file_path = "/home/user/python/download/"+display_name
+    file_basename = display_name
+    server_path = file_path
+    file_size = os.path.getsize(file_path)
+    response = make_response()
+    response.headers['Content-Description'] = 'File Transfer'
+    response.headers['Cache-Control'] = 'no-cache'
+    response.headers['Content-Type'] = 'application/octet-stream'
+    response.headers['Content-Disposition'] = 'attachment; filename=%s' % file_basename
+    response.headers['Content-Length'] = file_size
+    response.headers['X-Accel-Redirect'] = "/download/"+display_name # nginx: http://wiki.nginx.org/NginxXSendfile
+    return response
 
 
 @app.route('/start_download',methods=['POST'])

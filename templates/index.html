@@ -173,6 +173,14 @@
                         {
                             size = size/1000000 + ' GB';
                         }
+                        var tname = json_obj.files[i].name;
+                        tname =tname.split(".");
+                        tname = tname[tname.length-1];
+                        if(tname == "part")
+                        {
+                          $('#display_here').append('<li>'+json_obj.files[i].name+'<ul><li>size:-'+size+'</li></ul></li>');
+                          continue;
+                        }
                         $('#display_here').append('<li><a href="/download_file/'+json_obj.files[i].id+'" target="blank">'+json_obj.files[i].name+'</a><button type="button" class="btn-delete" id="'+json_obj.files[i].id+'" ><span class="glyphicon glyphicon-minus-sign"></span></button><ul><li>size:-'+size+'</li></ul></li>');
                    }
                    $('#display_here').append('</ul>');
