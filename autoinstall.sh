@@ -21,7 +21,7 @@ echo "---changing nginx setting"
 rm /etc/nginx/sites-enabled/default
 touch /etc/nginx/sites-available/flask_settings
 ln -s /etc/nginx/sites-available/flask_settings /etc/nginx/sites-enabled
-cat youtube-dl-with-flask/installation/server_setting.txt >> /etc/nginx/sites-enabled/flask_settings
+cat installation/server_setting.txt >> /etc/nginx/sites-enabled/flask_settings
 
 echo "--restart nginx"
 /etc/init.d/nginx restart > /dev/null
@@ -45,20 +45,22 @@ sudo ln -s /usr/local/share/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/loca
 echo "->testing phantomjs"
 phantomjs --version
 
+echo "->install python"
 echo "-pip3 install virtualenv > /dev/null"
 pip3 install virtualenv > /dev/null
 
-echo "-git clone https://github.com/gauswamimilan/youtube-dl-with-flask > /dev/null"
-git clone https://github.com/gauswamimilan/youtube-dl-with-flask > /dev/null
+echo "-virtualenv -p python3 venv  > /dev/null"
+virtualenv -p python3 venv > /dev/null
 
-echo "-virtualenv -p python3 youtube-dl-with-flask/venv  > /dev/null"
-virtualenv -p python3 youtube-dl-with-flask/venv > /dev/null
-
-echo "source youtube-dl-with-flask/venv/bin/activate > /dev/null"
-source youtube-dl-with-flask/venv/bin/activate > /dev/null
+echo "source venv/bin/activate > /dev/null"
+source venv/bin/activate > /dev/null
 
 echo "-pip3 install flask > /dev/null"
 pip3 install flask > /dev/null
 
 echo "-pip3 install gunicorn > /dev/null"
 pip3 install gunicorn > /dev/null
+
+echo "run app"
+echo "gunicorn app:app --daemon"
+gunicorn app:app --daemon
