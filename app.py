@@ -84,9 +84,7 @@ def download_file(file_id):
             if i["id"] == file_id:
                 display_name = i["name"]
                 break
-    file_path = "/home/user/python/download/"+display_name
     file_basename = display_name
-    server_path = file_path
     file_size = os.path.getsize(file_path)
     response = make_response()
     response.headers['Content-Description'] = 'File Transfer'
