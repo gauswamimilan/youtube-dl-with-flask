@@ -5,8 +5,9 @@ Youtube-dl-with-flask is personal cloud hosted youtube video downloader created 
 ### for installation in ubuntu
 To install requirements write the following commands
 ```sh
-git clone https://github.com/gauswamimilan/youtube-dl-with-flask /root/
-cd root/youtube-dl-with-flask
+cd /root
+git clone https://github.com/gauswamimilan/youtube-dl-with-flask
+cd /root/youtube-dl-with-flask
 source autoinstall.sh
 ```
 **Note:-** Installation may take a while so keep patience and it will run automatically
