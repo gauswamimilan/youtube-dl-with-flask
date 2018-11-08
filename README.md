@@ -12,5 +12,3 @@ source autoinstall.sh
 **Note:-** Run it as a **user other than root user**. Installation may take a while so keep patience and it will start automatically once installation is done
 
 close terminal and type ip address or domain name of server in browser and enjoy ( to test in your local machine you can type 'localhost' in browser )
-
-in the above steps **gunicorn app:app --daemon** will deploy app in localhost of server and nginx will serve as revese proxy and allow user to acess website
