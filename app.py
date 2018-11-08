@@ -85,7 +85,7 @@ def download_file(file_id):
                 display_name = i["name"]
                 break
     file_basename = display_name
-    file_size = os.path.getsize(file_path)
+    file_size = os.path.getsize("download/"+display_name)
     response = make_response()
     response.headers['Content-Description'] = 'File Transfer'
     response.headers['Cache-Control'] = 'no-cache'

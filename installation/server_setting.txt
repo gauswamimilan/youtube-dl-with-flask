@@ -5,7 +5,7 @@ server {
   
   location /download/ {
     internal; 
-    root /root/youtube-dl-with-flask;
+    root change_here;
   }
   
   location / {
