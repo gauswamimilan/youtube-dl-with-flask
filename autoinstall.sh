@@ -23,7 +23,7 @@ touch /etc/nginx/sites-available/flask_settings
 ln -s /etc/nginx/sites-available/flask_settings /etc/nginx/sites-enabled
 temp=$(pwd)
 echo $temp
-sed -i 's|change_here|'"$temp"'|g' server_setting.txt
+sed -i 's|change_here|'"$temp"'|g' installation/server_setting.txt
 cat installation/server_setting.txt >> /etc/nginx/sites-enabled/flask_settings
 
 echo "--restart nginx"

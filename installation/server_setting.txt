@@ -1,8 +1,5 @@
 server {
 
-  listen 80;
-  server_name localhost;
-  
   location /download/ {
     internal; 
     root change_here;
