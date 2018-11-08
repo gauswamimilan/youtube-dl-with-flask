@@ -66,4 +66,4 @@ pip3 install gunicorn > /dev/null
 
 echo "run app"
 echo "gunicorn app:app --daemon"
-gunicorn app:app
+gunicorn app:app --daemon
